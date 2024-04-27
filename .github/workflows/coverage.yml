@@ -39,4 +39,4 @@ jobs:
         with:
           flags: unit_tests
           token: ${{ secrets.CODECOV_TOKEN }}
-          slug: wso2/apim-apps
+          slug: nandika/apim-apps
