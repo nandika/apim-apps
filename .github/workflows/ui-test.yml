@@ -96,3 +96,8 @@ jobs:
           flags: unit_tests,integration_tests
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: nandika/coverage
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
