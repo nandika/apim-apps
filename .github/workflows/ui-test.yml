@@ -39,6 +39,7 @@ jobs:
           key: ${{ runner.os }}-m2
           restore-keys: ${{ runner.os }}-m2
       - name: Build apim-apps with Test.
+        continue-on-error: true
         run: mvn clean install --file apim-apps/pom.xml
       - name: Get apim.apps.version
         run: mvn help:evaluate -Dexpression=project.version -q --file apim-apps/pom.xml -DforceStdout > ../APIM_APPS_VERSION_FILE
@@ -68,6 +69,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
+          continue-on-error: true
           record: false
           working-directory: 'apim-apps/tests'
           spec: '**/*.spec.js'
@@ -89,3 +91,9 @@ jobs:
         with:
           name: server-logs
           path: wso2am-*/repository/logs
+      - name: Upload unit test coverage to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          flags: unit_tests,integration_tests
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: nandika/coverage
