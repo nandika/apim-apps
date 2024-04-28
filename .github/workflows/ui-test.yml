@@ -69,7 +69,6 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
-          continue-on-error: true
           record: false
           working-directory: 'apim-apps/tests'
           spec: '**/*.spec.js'
